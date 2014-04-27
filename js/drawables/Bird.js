@@ -19,6 +19,11 @@
     this.flapPower = 1.7;
     this.gravity = .004;
 
+    // translate to center of bird for rotation purposes
+    this.translateToX = ~~(this.x + (this.width / 2));
+    this.halfWidth = ~~(this.width / 2);
+    this.halfHeight = ~~(this.height / 2);
+
     window.addEventListener('mousedown', this.flap.bind(this));
   }
 
@@ -40,16 +45,20 @@
     }
 
     this.y = Math.floor(this.y + (this.velocity * delta));
-    if (this.y > (Game.height - this.height)) {
-      this.y = Game.height - this.height;
-    } else if (this.y < 0) {
-       this.y = 0;
+    if (this.y > Game.height) {
+      this.y = Game.height;
+    } else if (this.y < -this.height) {
+       this.y = -this.height;
     }
   };
 
   Bird.prototype.draw = function() {
-    this.ctx.clearRect(this.x, this.oldY, this.width, this.height);
-    SpriteSheet.prototype.draw.call(this);
+    this.ctx.clearRect(this.x-10, this.oldY-10, this.width+20, this.height+20);
+    this.ctx.save();
+    this.ctx.translate(this.translateToX, this.y + this.halfHeight);
+    this.ctx.rotate(this.velocity);
+    SpriteSheet.prototype.draw.call(this, -this.halfWidth, -this.halfHeight);
+    this.ctx.restore();
   };
 
   exports.Bird = Bird;

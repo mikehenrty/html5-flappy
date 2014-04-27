@@ -19,13 +19,13 @@
     this.currentFrame = Math.floor(this.fps * deltaAll) % this.frameCount;
   };
 
-  SpriteSheet.prototype.draw = function() {
+  SpriteSheet.prototype.draw = function(x, y) {
     var col = Math.floor(this.currentFrame % this.framesPerRow);
     var row = Math.floor(this.currentFrame / this.framesPerRow);
     this.ctx.drawImage(this.image,
       col * this.width, row * this.height,
       this.width, this.height,
-      this.x, this.y,
+      x || this.x, y || this.y,
       this.width, this.height);
   };
 

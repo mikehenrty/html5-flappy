@@ -8,11 +8,9 @@
     this.y = y || 0;
   }
 
-  Drawable.prototype.update = function(delta) {
-  };
+  Drawable.prototype.update = function(delta, deltaAll) {};
 
-  Drawable.prototype.draw = function() {
-  }
+  Drawable.prototype.draw = function() {}
 
   exports.Drawable = Drawable;
 })(this);
