@@ -7,7 +7,7 @@
 
   var images = {
     'background': '/img/background.png',
-    'bird': '/img/flying.png',
+    'bird': '/img/birdie.png',
     'pipe': '/img/pipe.png'
   };
 
@@ -31,9 +31,9 @@
     this.bg = new Background(this.backgroundCtx,
       this.imageLoader.get('background'),
       SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0),
+
     this.bird = new Bird(this.foregroundCtx,
-      this.imageLoader.get('bird'),
-      128, 128, 40, 200),
+      this.imageLoader.get('bird'), 40, 200),
 
     this.pipes = [
       new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
