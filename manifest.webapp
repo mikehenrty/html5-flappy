@@ -1,0 +1,10 @@
+{
+  "name": "Flappy Clone",
+  "description": "HTML5 Clone of Flappy Bird",
+  "launch_path": "/index.html",
+  "developer": {
+    "name": "Michael Henretty",
+    "url": "https://github.com/mikehenrty"
+  },
+  "default_locale": "en"
+}
