@@ -40,14 +40,14 @@
     this.pipes = [
       new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
         this.width + distanceBetweenPipes * 0),
-      new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-        this.width + distanceBetweenPipes * 1),
-      new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-        this.width + distanceBetweenPipes * 2),
-      new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-        this.width + distanceBetweenPipes * 3),
-      new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-        this.width + distanceBetweenPipes * 4),
+      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+      //  this.width + distanceBetweenPipes * 1),
+      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+      //  this.width + distanceBetweenPipes * 2),
+      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+      //  this.width + distanceBetweenPipes * 3),
+      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+      //  this.width + distanceBetweenPipes * 4),
     ];
 
     this.drawables = [
@@ -96,7 +96,7 @@
       if (this.running) {
         requestAnimationFrame(loop.bind(this));
       }
-      //this.FPS.update(delta);
+      this.FPS.update(delta);
     }.bind(this))();
   };
 

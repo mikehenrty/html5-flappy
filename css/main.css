@@ -7,11 +7,21 @@ body {
   height: 480px;
   position: relative;
   margin: 20px auto;
+  overflow: hidden;
+}
+
+.pipe {
+  width: 120px;
+  position: absolute;
+  top: 0;
+  left: -120px;
+  background-color: green;
+  transform: translateX(800px);
 }
 
 canvas.screen {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
   background: transparent;
   width: 800px;
@@ -19,7 +29,7 @@ canvas.screen {
 }
 
 #fps {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background: rgba(255, 0, 0, 0.3);

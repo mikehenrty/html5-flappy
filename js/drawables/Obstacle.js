@@ -11,6 +11,12 @@
     this.y = Game.height - this.height;
 
     this.speed = -0.4;
+
+    this.container = document.getElementById('container');
+    this.el = document.createElement('div');
+    this.el.classList.add('pipe');
+    this.el.style.height = this.height + 'px';
+    this.container.appendChild(this.el);
   }
 
   Obstacle.prototype = Object.create(Drawable);
@@ -34,14 +40,18 @@
       this.x = Game.width + this.width;
       this.y = Game.height - this.height;
     }
+
+    this.el.style.transform = 'translateX(' + this.x + 'px)';
+
+
   };
 
   Obstacle.prototype.draw = function() {
     if (this.offscreen) {
       return;
     }
-    this.ctx.clearRect(this.lastX, this.y, this.width, this.height);
-    this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    //this.ctx.clearRect(this.lastX, this.y, this.width, this.height);
+    //this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   };
 
   exports.Obstacle = Obstacle;
