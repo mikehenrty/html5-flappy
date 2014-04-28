@@ -1,12 +1,11 @@
 (function(exports) {
   'use strict';
 
-  var SCREEN_WIDTH = 800;
-  var SCREEN_HEIGHT = 480;
-
+  var SCREEN_WIDTH = 700;
+  var SCREEN_HEIGHT = 400;
 
   var images = {
-    'background': '/img/background.png',
+    'background': '/img/congruent_pentagon.png',
     'bird': '/img/birdie.png',
     'pipe': '/img/pipe.png'
   };
@@ -22,36 +21,42 @@
    * Initialize game state
    */
   Game.prototype.init = function() {
-    this.backgroundCtx = document.getElementById('background').getContext('2d');
+    this.stage = document.getElementById('container');
     this.foregroundCtx = document.getElementById('foreground').getContext('2d');
     this.birdCtx = document.getElementById('bird').getContext('2d');
 
     this.imageLoader = new ImageLoader(images);
     this.imageLoader.loadAll(this.startGame.bind(this));
 
-    this.bg = new Background(this.backgroundCtx,
-      this.imageLoader.get('background'),
-      SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
+//    this.bg = new Background(this.stage);
+
+    //this.bg = new Background(this.backgroundCtx,
+    //  this.imageLoader.get('background'),
+    //  SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
 
     this.bird = new Bird(this.birdCtx,
       this.imageLoader.get('bird'), 40, 200);
 
     var distanceBetweenPipes = 220;
-    this.pipes = [
-      new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-        this.width + distanceBetweenPipes * 0),
-      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-      //  this.width + distanceBetweenPipes * 1),
-      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-      //  this.width + distanceBetweenPipes * 2),
-      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-      //  this.width + distanceBetweenPipes * 3),
-      //new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-      //  this.width + distanceBetweenPipes * 4),
-    ];
+    this.pipes = [];
+    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+    //    this.width + distanceBetweenPipes * 0),
+    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+    //    this.width + distanceBetweenPipes * 1),
+    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+    //    this.width + distanceBetweenPipes * 2),
+    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+    //    this.width + distanceBetweenPipes * 3),
+    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
+    //    this.width + distanceBetweenPipes * 4),
+    //];
+    new Obstacle(this.stage, 0);
+    new Obstacle(this.stage, 700);
+    new Obstacle(this.stage, 1400);
+    new Obstacle(this.stage, 2100);
 
     this.drawables = [
-      this.bg,
+      //this.bg
       this.bird
     ].concat(this.pipes);
 

@@ -1,9 +1,18 @@
 (function(exports) {
-  function Background(ctx, image, width, height, x, y) {
-    Drawable.call(this, ctx, image, width, height, x, y);
-    this.speed = -.02; // pixels per milisecond
-    this.lastX = this.x;
-    this.dirty = false;
+  function Background(stage) {
+    this.stage = stage;
+    this.actor = document.getElementById('background');
+    //setTimeout(function() {
+    //  this.actor.classList.add('go');
+    //}.bind(this), 200);
+
+    //this.actor.addEventListener('transitionend', function() {
+    //  this.actor.classList.toggle('go');
+    //}.bind(this));
+    //Drawable.call(this, ctx, image, width, height, x, y);
+    //this.speed = -.02; // pixels per milisecond
+    //this.lastX = this.x;
+    //this.dirty = false;
   }
 
   Background.prototype = Object.create(Drawable.prototype);
