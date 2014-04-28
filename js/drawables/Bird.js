@@ -17,14 +17,18 @@
     this.terminalVelocity = 0.7;
     this.terminalFlap = 1.7;
     this.flapPower = 1.7;
-    this.gravity = .004;
+    this.gravity = .003;
 
     // translate to center of bird for rotation purposes
     this.translateToX = ~~(this.x + (this.width / 2));
     this.halfWidth = ~~(this.width / 2);
     this.halfHeight = ~~(this.height / 2);
 
-    window.addEventListener('mousedown', this.flap.bind(this));
+    if ('ontouchstart' in window) {
+      window.addEventListener('touchstart', this.flap.bind(this));
+    } else {
+      window.addEventListener('mousedown', this.flap.bind(this));
+    }
   }
 
   Bird.prototype = Object.create(Drawable.prototype);

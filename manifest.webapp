@@ -6,5 +6,6 @@
     "name": "Michael Henretty",
     "url": "https://github.com/mikehenrty"
   },
+  "orientation": ["landscape-primary"],
   "default_locale": "en"
 }
