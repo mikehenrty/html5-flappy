@@ -55,6 +55,12 @@
     new Obstacle(this.stage, 1400);
     new Obstacle(this.stage, 2100);
 
+    new Cloud(this.stage, 'large');
+    new Cloud(this.stage, 'small');
+    new Cloud(this.stage, 'large');
+    new Cloud(this.stage, 'med');
+    new Cloud(this.stage, 'small');
+
     this.drawables = [
       //this.bg
       this.bird

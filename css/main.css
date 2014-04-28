@@ -6,24 +6,6 @@ body {
   background-image: url(/img/congruent_pentagon.png);
 }
 
-body.on {
-  background-position: -600px, 0;
-}
-
-#background {
-  background-image: url(/img/congruent_pentagon.png);
-  position: absolute;
-  top: -15%;
-  left: 0;
-  height: 130%;
-  width: 200%;
-  transition: transform 90s linear;
-}
-
-#background.go {
-  transform: translateX(-100%);
-}
-
 #container {
   box-sizing: padding-box;
   border: 1px solid white;
@@ -35,7 +17,35 @@ body.on {
   transform: translate(-50%, -50%);
 }
 
+.cloud {
+  z-index: 1;
+  position: absolute;
+  left: -120px;
+  transition-property: transform;
+  transition-timing-function: linear;
+  transorm: translateX(820px);
+}
+
+.cloud.small {
+  background-image: url(/img/small-cloud.png);
+  width: 130px;
+  height: 47px;
+}
+
+.cloud.med {
+  background-image: url(/img/med-cloud.png);
+  width: 200px;
+  height: 171px;
+}
+
+.cloud.large {
+  background-image: url(/img/large-cloud.png);
+  width: 170px;
+  height: 100px;
+}
+
 .pipe {
+  z-index: 10;
   width: 120px;
   height: 600px;
   position: absolute;
@@ -48,15 +58,17 @@ body.on {
 }
 
 canvas.screen {
+  z-index: 5;
   position: absolute;
   top: 0;
   left: 0;
   background: transparent;
-  width: 800px;
-  height: 480px;
+  width: 700px;
+  height: 400px;
 }
 
 #fps {
+  z-index: 1000;
   position: fixed;
   top: 40px;
   left: 70px;
