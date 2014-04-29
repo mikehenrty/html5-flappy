@@ -15,6 +15,7 @@ body {
 }
 
 #container {
+  pointer-events: none;
   box-sizing: padding-box;
   border: 1px solid white;
   width: 700px;
@@ -64,8 +65,8 @@ body {
 
 .pipe {
   z-index: 10;
-  width: 120px;
-  height: 600px;
+  width: 100px;
+  height: 300px;
   position: absolute;
   top: 0;
   left: -120px;
@@ -77,6 +78,7 @@ body {
 }
 
 #fps {
+  pointer-events: none;
   z-index: 4000;
   position: fixed;
   top: 40px;

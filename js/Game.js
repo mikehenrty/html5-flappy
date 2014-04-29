@@ -16,16 +16,17 @@
    */
   Game.prototype.init = function() {
     this.stage = document.getElementById('container');
-    this.overlay = document.getElementById('overlay');
 
     this.bird = new Bird(this.stage);
 
-    var tapEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
-    this.overlay.addEventListener(tapEvent, function(evt) {
-      this.bird.flap();
-      evt.stopPropagation();
-      evt.preventDefault();
-    }.bind(this), true);
+    // overlap intercepts all touch events, and cancels them for performance
+    this.overlay = document.getElementById('overlay');
+    ['touchstart', 'touchmove', 'touchend', 
+     'mousedown', 'mouseup', 'mousemove'].forEach(
+      function(eventName) {
+        this.overlay.addEventListener(eventName, this, true);
+      }.bind(this));
+
 
 
     this.pipes = [
@@ -52,6 +53,15 @@
 
     this.startGame();
   };
+
+  Game.prototype.handleEvent = function(evt) {
+    evt.stopPropagation();
+    evt.stopImmediatePropagation();
+    evt.preventDefault();
+    if (evt.type === 'touchstart' || evt.type ==='mousedown') {
+      this.bird.flap();
+    }
+  }
 
   /**
    * update game state

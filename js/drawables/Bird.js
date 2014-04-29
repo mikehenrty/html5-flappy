@@ -2,7 +2,7 @@
   'use strict';
 
   var ANIMATION_FRAMES = 14;
-  var ANIMATION_SPEED = 0.015; // frames per milli
+  var ANIMATION_SPEED = 0.018; // frames per milli
 
   var BIRD_WIDTH = 183;
   var BIRD_HEIGHT = 168;
@@ -31,6 +31,10 @@
     } else {
       window.addEventListener('mousedown', this.flap.bind(this));
     }
+
+    //setInterval(function() {
+    //  this.flap();
+    //}.bind(this), 700);
   }
 
   Bird.prototype = Object.create(Animation.prototype);
