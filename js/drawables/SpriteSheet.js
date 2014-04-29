@@ -1,32 +1,32 @@
 (function(exports) {
   'use strict';
 
-  function SpriteSheet(ctx, image, width, height, x, y, 
-                       sheetWidth, sheetHeight, frameCount, fps) {
-    Drawable.call(this, ctx, image, width, height, x, y);
+  function SpriteSheet(stage, width, height, sheetWidth,
+                       sheetHeight, frameCount) {
+    this.stage = stage;
+    this.actor = document.createElement('div');
+    this.width = width;
+    this.height = height;
     this.sheetWidth = sheetWidth;
     this.sheetHeight = sheetHeight;
-    this.fps = fps || 0.06;
 
     this.frameCount = frameCount;
     this.framesPerRow = Math.floor(this.sheetWidth / this.width);
-    this.currentFrame = 0;
+    this.setFrame(0);
   }
 
-  SpriteSheet.prototype = Object.create(Drawable.prototype);
+  SpriteSheet.prototype.setFrame = function(frameNumber) {
+    if (frameNumber === this.currentFrame) {
+      return;
+    }
+    this.currentFrame = frameNumber;
+    var offsetX =
+      Math.floor(this.currentFrame % this.framesPerRow) * this.width;
+    var offsetY =
+      Math.floor(this.currentFrame / this.framesPerRow) * this.height;
 
-  SpriteSheet.prototype.update = function(delta, deltaAll) {
-    this.currentFrame = Math.floor(this.fps * deltaAll) % this.frameCount;
-  };
-
-  SpriteSheet.prototype.draw = function(x, y) {
-    var col = Math.floor(this.currentFrame % this.framesPerRow);
-    var row = Math.floor(this.currentFrame / this.framesPerRow);
-    this.ctx.drawImage(this.image,
-      col * this.width, row * this.height,
-      this.width, this.height,
-      x || this.x, y || this.y,
-      this.width, this.height);
+    this.actor.style.backgroundPosition =
+      '' + offsetX + 'px ' + offsetY + 'px';
   };
 
   exports.SpriteSheet = SpriteSheet;

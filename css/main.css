@@ -1,9 +1,17 @@
 body {
   background: black;
-  background-position: 0, 0;
   margin: 0;
   padding: 0;
   background-image: url(/img/congruent_pentagon.png);
+}
+
+#overlay {
+  position: fixed;
+  z-index: 5000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 #container {
@@ -15,6 +23,16 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.bird {
+  z-index: 5;
+  top: 0;
+  left:0;
+  background-image: url(/img/birdie.png);
+  width: 183px;
+  height: 168px;
+  position: absolute;
 }
 
 .cloud {
@@ -57,23 +75,13 @@ body {
   transform: translateX(820px);
 }
 
-canvas.screen {
-  z-index: 5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: transparent;
-  width: 700px;
-  height: 400px;
-}
-
 #fps {
-  z-index: 1000;
+  z-index: 4000;
   position: fixed;
   top: 40px;
-  left: 70px;
+  left: 170px;
   font-size: 48px;
-  color: white;
+  color: black;
   width: 30px;
   height: 30px;
 }

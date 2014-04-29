@@ -22,34 +22,25 @@
    */
   Game.prototype.init = function() {
     this.stage = document.getElementById('container');
-    this.foregroundCtx = document.getElementById('foreground').getContext('2d');
-    this.birdCtx = document.getElementById('bird').getContext('2d');
+    this.overlay = document.getElementById('overlay');
+
 
     this.imageLoader = new ImageLoader(images);
     this.imageLoader.loadAll(this.startGame.bind(this));
 
-//    this.bg = new Background(this.stage);
+    this.bird = new Bird(this.stage);
 
-    //this.bg = new Background(this.backgroundCtx,
-    //  this.imageLoader.get('background'),
-    //  SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0);
+    var tapEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
+    this.overlay.addEventListener(tapEvent, function(evt) {
+      this.bird.flap();
+      evt.stopPropagation();
+      evt.preventDefault();
+    }.bind(this), true);
 
-    this.bird = new Bird(this.birdCtx,
-      this.imageLoader.get('bird'), 40, 200);
 
     var distanceBetweenPipes = 220;
     this.pipes = [];
-    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-    //    this.width + distanceBetweenPipes * 0),
-    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-    //    this.width + distanceBetweenPipes * 1),
-    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-    //    this.width + distanceBetweenPipes * 2),
-    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-    //    this.width + distanceBetweenPipes * 3),
-    //  new Obstacle(this.foregroundCtx, this.imageLoader.get('pipe'),
-    //    this.width + distanceBetweenPipes * 4),
-    //];
+
     new Obstacle(this.stage, 0);
     new Obstacle(this.stage, 700);
     new Obstacle(this.stage, 1400);
@@ -67,9 +58,9 @@
     ].concat(this.pipes);
 
     // set up collision detection
-    this.collider = new Collider(this.bird);
+    // this.collider = new Collider(this.bird);
     this.pipes.forEach(function(pipe) {
-      this.collider.addObject(pipe);
+      //this.collider.addObject(pipe);
     }.bind(this));
 
     // fps tracker
@@ -83,7 +74,7 @@
     for (var i = 0; i < this.drawables.length; i++) {
       this.drawables[i].update(delta, deltaAll);
     }
-    this.collider.update(delta, deltaAll);
+    //this.collider.update(delta, deltaAll);
   };
 
   /**
@@ -91,7 +82,7 @@
    */
   Game.prototype.draw = function() {
     for (var i = 0; i < this.drawables.length; i++) {
-      this.drawables[i].draw();
+      //this.drawables[i].draw();
     }
   };
 
