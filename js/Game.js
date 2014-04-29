@@ -18,16 +18,15 @@
     this.stage = document.getElementById('container');
 
     this.bird = new Bird(this.stage);
+    this.collider = new Collider(this.bird);
 
     // overlap intercepts all touch events, and cancels them for performance
     this.overlay = document.getElementById('overlay');
-    ['touchstart', 'touchmove', 'touchend', 
-     'mousedown', 'mouseup', 'mousemove'].forEach(
+    ['touchstart',
+     'mousedown'].forEach(
       function(eventName) {
-        this.overlay.addEventListener(eventName, this, true);
+        window.addEventListener(eventName, this, true);
       }.bind(this));
-
-
 
     this.pipes = [
       new Obstacle(this.stage, 0),
@@ -35,6 +34,8 @@
       new Obstacle(this.stage, 1400),
       new Obstacle(this.stage, 2100)
     ];
+
+    this.pipes.forEach(this.collider.addObject.bind(this.collider));
 
     this.clouds = [
       new Cloud(this.stage, 'large'),
@@ -70,7 +71,7 @@
     for (var i = 0; i < this.drawables.length; i++) {
       this.drawables[i].update(delta, deltaAll);
     }
-    //this.collider.update(delta, deltaAll);
+    this.collider.update(delta, deltaAll);
   };
 
   /**

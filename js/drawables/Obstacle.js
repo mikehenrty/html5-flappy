@@ -24,6 +24,7 @@
   };
 
   Obstacle.prototype.start = function() {
+    this.animationStart = Date.now();
     this.actor.style.transform = 'translateX(0)';
     this.actor.addEventListener('transitionend', this.reset.bind(this));
   };
@@ -33,11 +34,20 @@
     this.generateRandomHeight();
     this.actor.style.transform = 'translateX(820px)';
     setTimeout(function() {
+      this.animationStart = Date.now();
       this.actor.style.transitionDuration = this.duration + 'ms';
       this.actor.style.transform = 'translateX(0)';
     }.bind(this), 1000);
   };
 
+  Obstacle.prototype.getX = function () {
+    return 700 + ((this.actor.style.left - 820 / this.duration) *
+      (Date.now() - this.animationStart));
+  };
+
+  Obstacle.prototype.getY = function() {
+    return Game.height - this.height;
+  };
 
   Obstacle.prototype.update = function(delta, deltaAll) {
     return;

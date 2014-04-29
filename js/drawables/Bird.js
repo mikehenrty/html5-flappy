@@ -26,11 +26,11 @@
     this.flapPower = 1.7;
     this.gravity = .003;
 
-    if ('ontouchstart' in window) {
-      window.addEventListener('touchstart', this.flap.bind(this));
-    } else {
-      window.addEventListener('mousedown', this.flap.bind(this));
-    }
+    //if ('ontouchstart' in window) {
+    //  window.addEventListener('touchstart', this.flap.bind(this));
+    //} else {
+    //  window.addEventListener('mousedown', this.flap.bind(this));
+    //}
 
     //setInterval(function() {
     //  this.flap();
