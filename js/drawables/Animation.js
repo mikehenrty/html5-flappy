@@ -11,7 +11,7 @@
   Animation.prototype = Object.create(SpriteSheet.prototype);
 
   Animation.prototype.update = function(delta, deltaAll) {
-    this.setFrame(Math.floor(this.fps * deltaAll) % this.frameCount);
+    this.setFrame(~~(this.fps * deltaAll) % this.frameCount);
   };
 
   exports.Animation = Animation;

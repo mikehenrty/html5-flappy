@@ -41,7 +41,7 @@ body {
   left: -120px;
   transition-property: transform;
   transition-timing-function: linear;
-  transorm: translateX(820px);
+  transform: translateX(820px);
 }
 
 .cloud.small {
@@ -69,7 +69,8 @@ body {
   position: absolute;
   top: 0;
   left: -120px;
-  background-image: url(/img/pipe-tall.png);
+  /* background-image: url(/img/pipe-tall.png); */
+  background-color: green;
   transition-property: transform;
   transition-timing-function: linear;
   transform: translateX(820px);

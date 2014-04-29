@@ -26,7 +26,8 @@
       Math.floor(this.currentFrame / this.framesPerRow) * this.height;
 
     this.actor.style.backgroundPosition =
-      '' + offsetX + 'px ' + offsetY + 'px';
+      '' + (this.sheetWidth - offsetX) + 'px ' +
+           (this.sheetHeight - offsetY) + 'px';
   };
 
   exports.SpriteSheet = SpriteSheet;

@@ -4,12 +4,6 @@
   var SCREEN_WIDTH = 700;
   var SCREEN_HEIGHT = 400;
 
-  var images = {
-    'background': '/img/congruent_pentagon.png',
-    'bird': '/img/birdie.png',
-    'pipe': '/img/pipe.png'
-  };
-
   function Game() {
     this.running = false;
     this.height = SCREEN_HEIGHT;
@@ -24,10 +18,6 @@
     this.stage = document.getElementById('container');
     this.overlay = document.getElementById('overlay');
 
-
-    this.imageLoader = new ImageLoader(images);
-    this.imageLoader.loadAll(this.startGame.bind(this));
-
     this.bird = new Bird(this.stage);
 
     var tapEvent = 'ontouchstart' in window ? 'touchstart' : 'mousedown';
@@ -38,33 +28,29 @@
     }.bind(this), true);
 
 
-    var distanceBetweenPipes = 220;
-    this.pipes = [];
+    this.pipes = [
+      new Obstacle(this.stage, 0),
+      new Obstacle(this.stage, 700),
+      new Obstacle(this.stage, 1400),
+      new Obstacle(this.stage, 2100)
+    ];
 
-    new Obstacle(this.stage, 0);
-    new Obstacle(this.stage, 700);
-    new Obstacle(this.stage, 1400);
-    new Obstacle(this.stage, 2100);
-
-    new Cloud(this.stage, 'large');
-    new Cloud(this.stage, 'small');
-    new Cloud(this.stage, 'large');
-    new Cloud(this.stage, 'med');
-    new Cloud(this.stage, 'small');
+    this.clouds = [
+      new Cloud(this.stage, 'large'),
+      new Cloud(this.stage, 'small'),
+      new Cloud(this.stage, 'large'),
+      new Cloud(this.stage, 'med'),
+      new Cloud(this.stage, 'small'),
+    ];
 
     this.drawables = [
-      //this.bg
       this.bird
-    ].concat(this.pipes);
-
-    // set up collision detection
-    // this.collider = new Collider(this.bird);
-    this.pipes.forEach(function(pipe) {
-      //this.collider.addObject(pipe);
-    }.bind(this));
+    ];
 
     // fps tracker
     this.FPS = new FPS(document.getElementById('fps'));
+
+    this.startGame();
   };
 
   /**

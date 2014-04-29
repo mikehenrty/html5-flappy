@@ -2,7 +2,7 @@
   'use strict';
 
   var ANIMATION_FRAMES = 14;
-  var ANIMATION_SPEED = 0.003; // frames per milli
+  var ANIMATION_SPEED = 0.015; // frames per milli
 
   var BIRD_WIDTH = 183;
   var BIRD_HEIGHT = 168;
@@ -22,7 +22,7 @@
 
     this.velocity = 0;
     this.terminalVelocity = 0.7;
-    this.terminalFlap = 1.7;
+    this.terminalFlap = 1.0;
     this.flapPower = 1.7;
     this.gravity = .003;
 
@@ -52,8 +52,9 @@
     this.y = ~~(this.y + (this.velocity * delta));
     if (this.y > Game.height + this.height) {
       this.y = Game.height + this.height;
-    } else if (this.y < -this.height) {
-       this.y = -this.height;
+    } else if (this.y < 0) {
+       this.velocity = ~~(this.velocity / 2);
+       this.y = 0;
     }
 
     this.actor.style.transform =
