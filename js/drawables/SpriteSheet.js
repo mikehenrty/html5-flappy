@@ -21,13 +21,13 @@
     }
     this.currentFrame = frameNumber;
     var offsetX =
-      Math.floor(this.currentFrame % this.framesPerRow) * this.width;
+      (this.currentFrame % this.framesPerRow) * this.width;
     var offsetY =
       Math.floor(this.currentFrame / this.framesPerRow) * this.height;
 
     this.actor.style.backgroundPosition =
-      '' + (this.sheetWidth - offsetX) + 'px ' +
-           (this.sheetHeight - offsetY) + 'px';
+      '' + -offsetX + 'px ' +
+           -offsetY + 'px';
   };
 
   exports.SpriteSheet = SpriteSheet;

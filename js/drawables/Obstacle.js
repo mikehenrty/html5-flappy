@@ -24,12 +24,14 @@
   };
 
   Obstacle.prototype.start = function() {
+    this.splashed = false;
     this.animationStart = Date.now();
     this.actor.style.transform = 'translateX(0)';
     this.actor.addEventListener('transitionend', this.reset.bind(this));
   };
 
   Obstacle.prototype.reset = function reset() {
+    this.splashed = false;
     this.actor.style.transitionDuration = '0ms';
     this.generateRandomHeight();
     this.actor.style.transform = 'translateX(820px)';
@@ -47,6 +49,14 @@
 
   Obstacle.prototype.getY = function() {
     return Game.height - this.height;
+  };
+
+  Obstacle.prototype.splash = function(x, y) {
+    if (!this.splashed) {
+      this.splashed = true;
+      var splash = Game.getSplash();
+      splash.play(x, y, -120, this.speed);
+    }
   };
 
   Obstacle.prototype.update = function(delta, deltaAll) {

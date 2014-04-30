@@ -34,14 +34,18 @@
       new Obstacle(this.stage, 1400),
       new Obstacle(this.stage, 2100)
     ];
-
     this.pipes.forEach(this.collider.addObject.bind(this.collider));
 
+    this.splashes = [
+      new Splash(this.stage),
+      new Splash(this.stage)
+    ];
+
     this.clouds = [
+      new Cloud(this.stage, 'med'),
+      new Cloud(this.stage, 'large'),
       new Cloud(this.stage, 'large'),
       new Cloud(this.stage, 'small'),
-      new Cloud(this.stage, 'large'),
-      new Cloud(this.stage, 'med'),
       new Cloud(this.stage, 'small'),
     ];
 
@@ -53,6 +57,12 @@
     this.FPS = new FPS(document.getElementById('fps'));
 
     this.startGame();
+  };
+
+  Game.prototype.getSplash = function() {
+    var splash = this.splashes.shift();
+    this.splashes.push(splash);
+    return splash;
   };
 
   Game.prototype.handleEvent = function(evt) {

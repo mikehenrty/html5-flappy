@@ -26,8 +26,9 @@
         var obj = this.objects[i];
         var objX = obj.getX();
         var objX2 = objX + obj.width;
-        if (objX < sub.x2 && objX2 > sub.x && obj.getY() < sub.y2) {
-          Game.endGame();
+        var objY = obj.getY();
+        if (objX < sub.x2 && objX2 > sub.x && objY < sub.y2) {
+          obj.splash(objX, objY);
           return;
         }
       }
