@@ -16,9 +16,11 @@
    */
   Game.prototype.init = function() {
     this.stage = document.getElementById('container');
-
+    this.startScreen = new StartScreen(this.stage);
     this.bird = new Bird(this.stage);
     this.collider = new Collider(this.bird);
+
+    this.FPS = new FPS();
 
     // overlap intercepts all touch events, and cancels them for performance
     this.overlay = document.getElementById('overlay');
@@ -29,40 +31,24 @@
       }.bind(this));
 
     this.pipes = [
-      new Obstacle(this.stage, 0),
-      new Obstacle(this.stage, 700),
-      new Obstacle(this.stage, 1400),
-      new Obstacle(this.stage, 2100)
+      new Obstacle(this.stage),
+      new Obstacle(this.stage),
+      new Obstacle(this.stage),
     ];
     this.pipes.forEach(this.collider.addObject.bind(this.collider));
-
-    this.splashes = [
-      new Splash(this.stage),
-      new Splash(this.stage)
-    ];
 
     this.clouds = [
       new Cloud(this.stage, 'med'),
       new Cloud(this.stage, 'large'),
-      new Cloud(this.stage, 'large'),
-      new Cloud(this.stage, 'small'),
       new Cloud(this.stage, 'small'),
     ];
 
-    this.drawables = [
-      this.bird
-    ];
-
-    // fps tracker
-    this.FPS = new FPS(document.getElementById('fps'));
-
-    this.startGame();
-  };
-
-  Game.prototype.getSplash = function() {
-    var splash = this.splashes.shift();
-    this.splashes.push(splash);
-    return splash;
+    this.startScreen.button.addEventListener('click',
+      this.startGame.bind(this));
+    this.startScreen.screen.addEventListener('mousedown',
+      this.startGame.bind(this));
+    this.startScreen.screen.addEventListener('touchdown',
+      this.startGame.bind(this));
   };
 
   Game.prototype.handleEvent = function(evt) {
@@ -78,29 +64,28 @@
    * update game state
    */
   Game.prototype.update = function(delta, deltaAll) {
-    for (var i = 0; i < this.drawables.length; i++) {
-      this.drawables[i].update(delta, deltaAll);
-    }
+    this.bird.update(delta, deltaAll);
     this.collider.update(delta, deltaAll);
-  };
-
-  /**
-   * render game objects
-   */
-  Game.prototype.draw = function() {
-    for (var i = 0; i < this.drawables.length; i++) {
-      //this.drawables[i].draw();
-    }
   };
 
   Game.prototype.startGame = function() {
     this.running = true;
     this.startTime = this.lastNow = Date.now();
+    this.startScreen.hide();
+    this.currentType = 'top';
+
+    setInterval(function() {
+      var pipe = this.pipes.shift();
+      pipe.setType(this.currentType);
+      this.currentType = (this.currentType === 'top') ? 'bottom' : 'top';
+      pipe.start();
+      this.pipes.push(pipe);
+    }.bind(this), 800);
+
     (function loop() {
       var now = Date.now();
       var delta = now - this.lastNow;
       this.update(delta, now - this.startTime);
-      this.draw();
       this.lastNow = now;
       if (this.running) {
         requestAnimationFrame(loop.bind(this));
@@ -115,4 +100,23 @@
 
   // Singleton
   exports.Game = new Game();
+
+  function StartScreen(stage) {
+    this.stage = stage;
+    this.screen = document.createElement('div');
+    this.screen.id = 'start-screen';
+    this.button = document.createElement('button');
+    this.button.textContent = 'Start';
+    this.screen.appendChild(this.button);
+    document.body.appendChild(this.screen);
+  }
+
+  StartScreen.prototype.hide = function() {
+    this.screen.hidden = true;
+  };
+
+  StartScreen.prototype.show = function() {
+    this.screen.hidden = false;
+  };
+
 }(this));

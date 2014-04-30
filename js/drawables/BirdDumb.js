@@ -3,11 +3,13 @@
 
   var ANIMATION_FRAMES = 8;
   var ANIMATION_SPEED = 0.010; // frames per milli
+  var ANIMATION_SPEED_LIMIT = 0.050;
+  var ANIMATION_COOLDOWN = 500; // ms
 
-  var BIRD_WIDTH = 110;
-  var BIRD_HEIGHT = 74;
-  var SHEET_WIDTH = 218;
-  var SHEET_HEIGHT = 288;
+  var BIRD_WIDTH = 75;
+  var BIRD_HEIGHT = 51;
+  var SHEET_WIDTH = 150;
+  var SHEET_HEIGHT = 203;
 
   function Bird(stage) {
     Animation.call(this, stage, BIRD_WIDTH, BIRD_HEIGHT,
@@ -23,7 +25,7 @@
     this.velocity = 0;
     this.terminalVelocity = 0.7;
     this.terminalFlap = 1.0;
-    this.flapPower = 1.7;
+    this.flapPower = 1.6;
     this.gravity = .003;
 
     //if ('ontouchstart' in window) {

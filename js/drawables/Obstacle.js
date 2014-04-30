@@ -1,8 +1,9 @@
 (function(exports) {
   'use strict';
 
-  function Obstacle(stage, delay) {
+  function Obstacle(stage, type) {
     this.stage = stage;
+    this.type = type;
     this.actor = document.createElement('div');
     this.actor.classList.add('pipe');
     this.stage.appendChild(this.actor);
@@ -12,34 +13,42 @@
 
     this.speed = 0.4;
     this.duration = ~~((Game.width + this.width) / this.speed);
-    this.actor.style.transitionDuration = this.duration + 'ms';
 
-    setTimeout(this.start.bind(this), delay);
+    this.actor.addEventListener('transitionend', this.reset.bind(this));
   }
 
   Obstacle.prototype.generateRandomHeight = function() {
-    var lowerLimit = Game.height / 4;
-    this.height = utils.getRandomInt(lowerLimit, lowerLimit + (Game.height / 2));
-    this.actor.style.top = (Game.height - this.height) + 'px';
+    var lowerLimit = 60;
+    this.height = utils.getRandomInt(lowerLimit,
+      lowerLimit + ~~(Game.height / 2.5));
+    if (this.type === 'top') {
+      this.actor.style.bottom = (Game.height - this.height) + 'px';
+      this.actor.style.top = 'auto';
+    } else if (this.type === 'bottom') {
+      this.actor.style.top = (Game.height - this.height) + 'px';
+      this.actor.style.bottom = 'auto';
+    }
+  };
+
+  Obstacle.prototype.flip = function() {
+    this.setType((this.type === 'top') ? 'bottom' : 'top');
+  };
+
+  Obstacle.prototype.setType = function(type) {
+    this.type = type;
+    this.generateRandomHeight();
   };
 
   Obstacle.prototype.start = function() {
-    this.splashed = false;
     this.animationStart = Date.now();
+    this.actor.style.transitionDuration = this.duration + 'ms';
     this.actor.style.transform = 'translateX(0)';
-    this.actor.addEventListener('transitionend', this.reset.bind(this));
   };
 
   Obstacle.prototype.reset = function reset() {
-    this.splashed = false;
     this.actor.style.transitionDuration = '0ms';
     this.generateRandomHeight();
     this.actor.style.transform = 'translateX(820px)';
-    setTimeout(function() {
-      this.animationStart = Date.now();
-      this.actor.style.transitionDuration = this.duration + 'ms';
-      this.actor.style.transform = 'translateX(0)';
-    }.bind(this), 1000);
   };
 
   Obstacle.prototype.getX = function () {
@@ -51,13 +60,17 @@
     return Game.height - this.height;
   };
 
-  Obstacle.prototype.splash = function(x, y) {
-    if (!this.splashed) {
-      this.splashed = true;
-      var splash = Game.getSplash();
-      splash.play(x, y, -120, this.speed);
-    }
+  Obstacle.prototype.hit = function() {
+    this.actor.style.backgroundColor = 'red';
   };
+
+  //Obstacle.prototype.splash = function(x, y) {
+  //  if (!this.splashed) {
+  //    this.splashed = true;
+  //    var splash = Game.getSplash();
+  //    splash.play(x, y, -120, this.speed);
+  //  }
+  //};
 
   Obstacle.prototype.update = function(delta, deltaAll) {
     return;

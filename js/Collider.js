@@ -5,7 +5,7 @@
     this.subject = subject;
     this.objects = [];
 
-    this.threshold = 200;
+    this.threshold = 50;
     this.timeSinceLastCheck = 0;
   }
 
@@ -26,10 +26,20 @@
         var obj = this.objects[i];
         var objX = obj.getX();
         var objX2 = objX + obj.width;
-        var objY = obj.getY();
-        if (objX < sub.x2 && objX2 > sub.x && objY < sub.y2) {
-          obj.splash(objX, objY);
-          return;
+        if (objX < sub.x2 && objX2 > sub.x) {
+          var objY = obj.getY();
+
+          if (obj.type === 'bottom') {
+            if (objY < sub.y2) {
+              obj.hit();
+              return;
+            }
+          } else {
+            if (objY > sub.y2) {
+              obj.hit();
+              return;
+            }
+          }
         }
       }
     }
