@@ -10,20 +10,20 @@
     type = type || 'large';
     switch(type) {
       case 'small':
-        this.speed = 0.11;
+        this.speed = 0.06;
         this.width = 130;
         this.height = 47;
         this.actor.classList.add('small');
         break;
       case 'med':
-        this.speed = 0.09;
+        this.speed = 0.02;
         this.width = 200;
         this.height = 171;
         this.actor.classList.add('med');
         break;
       case 'large':
       default:
-        this.speed = 0.08;
+        this.speed = 0.04;
         this.width = 170;
         this.height = 100;
         this.actor.classList.add('large');
