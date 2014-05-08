@@ -46,6 +46,7 @@
   };
 
   Obstacle.prototype.reset = function reset() {
+    this.actor.style.backgroundColor = 'transparent';
     this.actor.style.transitionDuration = '0ms';
     this.generateRandomHeight();
     this.actor.style.transform = 'translateX(820px)';

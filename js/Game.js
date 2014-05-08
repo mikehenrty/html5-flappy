@@ -20,7 +20,7 @@
     this.bird = new Bird(this.stage);
     this.collider = new Collider(this.bird);
 
-    this.FPS = new FPS();
+    //this.FPS = new FPS();
 
     // overlap intercepts all touch events, and cancels them for performance
     this.overlay = document.getElementById('overlay');
@@ -49,6 +49,7 @@
       this.startGame.bind(this));
     this.startScreen.screen.addEventListener('touchdown',
       this.startGame.bind(this));
+    setTimeout(this.startGame.bind(this), 1000);
   };
 
   Game.prototype.handleEvent = function(evt) {
@@ -90,7 +91,7 @@
       if (this.running) {
         requestAnimationFrame(loop.bind(this));
       }
-      this.FPS.update(delta);
+      //this.FPS.update(delta);
     }.bind(this))();
   };
 
