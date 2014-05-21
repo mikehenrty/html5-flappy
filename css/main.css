@@ -2,8 +2,8 @@ body {
   background: black;
   margin: 0;
   padding: 0;
-  /* background-image: url(/img/congruent_pentagon.png); */
-  background-image: url(/img/stardust.png);
+  /* background-image: url(../img/congruent_pentagon.png); */
+  background-image: url(../img/stardust.png);
 }
 
 #overlay {
@@ -51,7 +51,7 @@ body {
   z-index: 5;
   top: 0;
   left:0;
-  background-image: url(/img/birdie.png);
+  background-image: url(../img/birdie.png);
   width: 183px;
   height: 168px;
   position: absolute;
@@ -61,7 +61,7 @@ body {
   z-index: 5;
   top: 0;
   left:0;
-  background-image: url(/img/little-dumb-bird.png);
+  background-image: url(../img/little-dumb-bird.png);
   width: 75px;
   height: 51px;
   position: absolute;
@@ -71,7 +71,7 @@ body {
   z-index: 5;
   top: 0;
   left:0;
-  background-image: url(/img/dumb-bird.png);
+  background-image: url(../img/dumb-bird.png);
   width: 32px;
   height: 32px;
   position: absolute;
@@ -87,19 +87,19 @@ body {
 }
 
 .cloud.small {
-  background-image: url(/img/small-cloud.png);
+  background-image: url(../img/small-cloud.png);
   width: 130px;
   height: 47px;
 }
 
 .cloud.med {
-  background-image: url(/img/med-cloud.png);
+  background-image: url(../img/med-cloud.png);
   width: 200px;
   height: 171px;
 }
 
 .cloud.large {
-  background-image: url(/img/large-cloud.png);
+  background-image: url(../img/large-cloud.png);
   width: 170px;
   height: 100px;
 }
@@ -111,7 +111,7 @@ body {
   position: absolute;
   top: 0;
   left: -120px;
-  background-image: url(/img/small-pipe.png);
+  background-image: url(../img/small-pipe.png);
   transition-property: transform;
   transition-timing-function: linear;
   transform: translateX(820px);
